@@ -85,6 +85,42 @@ class LinkedList {
 		}
 	}
 	
+	deleteFirst() {
+		if(this.firstNode != null) {
+			if(this.firstNode.next != null) {
+				this.firstNode = this.firstNode.next;
+			} else {
+				this.firstNode = null;
+			}
+			
+			this.totalNode--;
+			return true;
+		}
+		
+		return false;
+	}
+	
+	deleteLast() {
+		if(this.firstNode != null) {
+			let currentNode = this.firstNode;
+			if(currentNode.next == null) {
+				this.firstNode = null;
+			} else {
+				let previousNode = null;
+			
+				while(currentNode.next != null) {
+					previousNode = currentNode;
+					currentNode = currentNode.next;
+				}
+			
+				previousNode.next = null;
+				this.totalNode--;
+				return true;
+			}
+		}
+		return false;
+	}
+	
 	search(data) {
 		if(this.totalNode) {
 			let currentNode = this.firstNode;
@@ -123,4 +159,10 @@ bookTitles.insertBefore('Introduction to Calculus', 'Programming Intelligence');
 bookTitles.display();
 
 bookTitles.insertAfter('Introduction to Calculus', 'Programming Intelligence');
+bookTitles.display();
+
+bookTitles.deleteFirst();
+bookTitles.display();
+
+bookTitles.deleteLast();
 bookTitles.display();
