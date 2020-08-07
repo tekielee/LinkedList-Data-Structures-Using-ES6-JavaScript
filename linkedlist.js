@@ -121,6 +121,28 @@ class LinkedList {
 		return false;
 	}
 	
+	searchAndDelete(query) {
+		if(this.firstNode) {
+			let previous = null;
+			let currentNode = this.firstNode;
+			while(currentNode != null) {
+				if(currentNode.data == query) {
+					if(currentNode.next == null) {
+						previous.next = null;
+					} else {
+						previous.next = currentNode.next;
+					}
+					
+					this.totalNode--;
+					break;
+				}
+				
+				previous = currentNode;
+				currentNode = currentNode.next;
+			}
+		}
+	}
+	
 	search(data) {
 		if(this.totalNode) {
 			let currentNode = this.firstNode;
@@ -165,4 +187,7 @@ bookTitles.deleteFirst();
 bookTitles.display();
 
 bookTitles.deleteLast();
+bookTitles.display();
+
+bookTitles.searchAndDelete('Introduction to JavaScript and Data Structures');
 bookTitles.display();
