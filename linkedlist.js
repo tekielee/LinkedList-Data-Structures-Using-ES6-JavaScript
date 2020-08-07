@@ -53,7 +53,6 @@ class LinkedList {
 			let currentNode = this.firstNode;
 			while(currentNode != null) {
 				if(currentNode.data == query) {
-					console.log('found')
 					newNode.next = currentNode;
 					previous.next = newNode;
 					this.totalNode++;
@@ -65,11 +64,32 @@ class LinkedList {
 		}
 	}
 	
+	insertAfter(data, query) {
+		let newNode = new ListNode(data);
+
+		if(this.firstNode) {
+			let nextNode = null;
+			let currentNode = this.firstNode;
+			while(currentNode != null) {
+				if(currentNode.data == query) {
+					if(nextNode != null) {
+						newNode.next = nextNode;
+					}
+					currentNode.next = newNode;
+					this.totalNode++;
+					break;
+				}
+				currentNode = currentNode.next;
+				nextNode = currentNode.next;				
+			}
+		}
+	}
+	
 	search(data) {
 		if(this.totalNode) {
 			let currentNode = this.firstNode;
 			while(currentNode != null) {
-				if(currentNode == data) {
+				if(currentNode.data == data) {
 					return currentNode;
 				}
 				
@@ -100,4 +120,7 @@ bookTitles.insertAtFirst('Mediawiki Administratrive tutorial guide')
 bookTitles.display();
 
 bookTitles.insertBefore('Introduction to Calculus', 'Programming Intelligence');
+bookTitles.display();
+
+bookTitles.insertAfter('Introduction to Calculus', 'Programming Intelligence');
 bookTitles.display();
