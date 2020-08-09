@@ -143,10 +143,42 @@ class LinkedList {
 		}
 	}
 	
+	reverse() {
+		if(this.firstNode !== null) {
+			if(this.firstNode.next !== null) {
+				let reversedList = null;
+				let next = null;
+				let currentNode = this.firstNode;
+				while(currentNode !== null) {
+					next = currentNode.next;
+					currentNode.next = reversedList;
+					reversedList = currentNode;
+					currentNode = next;
+				}
+				this.firstNode = reversedList;
+			}
+		}
+		
+	}
+	
+	getNthNode(n) {
+		let count = 1;
+		if(this.firstNode !== null) {
+			let currentNode = this.firstNode;
+			while(currentNode !== null) {
+				if(count === n) {
+					return currentNode.data;
+				}
+				count++;
+				currentNode = currentNode.next;
+			}
+		}
+	}
+	
 	search(data) {
 		if(this.totalNode) {
 			let currentNode = this.firstNode;
-			while(currentNode != null) {
+			while(currentNode !== null) {
 				if(currentNode.data == data) {
 					return currentNode;
 				}
@@ -191,3 +223,8 @@ bookTitles.display();
 
 bookTitles.searchAndDelete('Introduction to JavaScript and Data Structures');
 bookTitles.display();
+
+bookTitles.reverse();
+bookTitles.display();
+
+console.log('2nd Item is: ' + bookTitles.getNthNode(2));
